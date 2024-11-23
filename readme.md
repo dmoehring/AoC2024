@@ -14,9 +14,9 @@ Die Utility-Klassen, die in diesen Lösungen verwendet werden, stammen ursprüng
 
 ## Verzeichnisstruktur
 
-- **src/main/java/com/example/adventofcode2024/day(*)**: Hier befinden sich die Java-Dateien mit den Lösungen für die einzelnen Advent of Code Aufgaben.
+- **src/main/java/xyz/domknuddle/aoc/adventofcode2024/day(*)**: Hier befinden sich die Java-Dateien mit den Lösungen für die einzelnen Advent of Code Aufgaben.
 
-- **src/main/java/com/example/adventofcode2024/util/**: Enthält die Utility-Klassen aus dem [advent-of-code-2022](https://github.com/xN1ghtw0lfx/advent-of-code-2022) Repository, die für die Implementierung der Lösungen verwendet werden.
+- **src/main/java/xyz/domknuddle/aoc/adventofcode2024/util/**: Enthält die Utility-Klassen aus dem [advent-of-code-2022](https://github.com/xN1ghtw0lfx/advent-of-code-2022) Repository, die für die Implementierung der Lösungen verwendet werden.
 
 ---
 
@@ -34,7 +34,7 @@ Jede Aufgabe ist in einer eigenen Klasse implementiert und kann unabhängig vone
 
 ## Nutzung der Utility-Klassen
 
-Die Utility-Klassen in `com.example.adventofcode2023.util` enthalten allgemeine Funktionen, um die main-Klassen und die Test-Klassen zu erstellen und den Input zu laden. Diese Klassen wurden angepasst, um den Anforderungen der aktuellen Aufgaben gerecht zu werden.
+Die Utility-Klassen in `xyz.domknuddle.aoc.adventofcode2024.util` enthalten allgemeine Funktionen, um die main-Klassen und die Test-Klassen zu erstellen und den Input zu laden. Diese Klassen wurden angepasst, um den Anforderungen der aktuellen Aufgaben gerecht zu werden.
 
 ---
 
