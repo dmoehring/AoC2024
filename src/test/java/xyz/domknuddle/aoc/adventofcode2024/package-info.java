@@ -1,0 +1,1 @@
+package xyz.domknuddle.aoc.adventofcode2024;

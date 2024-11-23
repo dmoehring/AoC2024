@@ -1,0 +1,34 @@
+package xyz.domknuddle.aoc.adventofcode2024.day{{day}};
+
+import xyz.domknuddle.aoc.adventofcode2024.util.Day;
+
+import java.util.stream.Stream;
+
+public class Day{{day}}{{name}} implements Day{{day}} {
+
+    @Override
+    public String answerOne() {
+        return answerOne(input());
+    }
+
+    @Override
+    public String answerTwo() {
+        return answerTwo(input());
+    }
+
+    public static void main(String[] args) {
+        Day{{day}} day = new Day{{day}}{{name}}();
+
+        System.out.println("Answer 1: " + day.answerOne());
+        System.out.println("Answer 2: " + day.answerTwo());
+    }
+
+    public static String answerOne(Stream<String> input) {
+        return"";
+    }
+
+    public static String answerTwo(Stream<String> input) {
+         return"";
+    }
+
+}

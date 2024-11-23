@@ -1,0 +1,57 @@
+package xyz.domknuddle.aoc.adventofcode2024.day{{day}};
+
+import java.util.*;
+import java.util.stream.Stream;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import xyz.domknuddle.aoc.adventofcode2024.DayTest;
+
+class Day{{day}}Test extends DayTest<Day{{day}}, String, String> {
+
+	protected static List<Day{{day}}> getDays() {
+		return getDays(Day{{day}}.class);
+	}
+
+	@Override
+	protected String answerOne() {
+		return "";
+	}
+
+	@Override
+	protected String answerTwo() {
+		return "";
+	}
+
+	 @Override
+        protected Stream<String> inputOneExample() {
+            return Arrays.stream(new String[]{
+            });
+        }
+
+        @Override
+        protected Stream<String> inputTwoExample() {
+            return Arrays.stream(new String[]{
+            });
+        }
+
+        @Override
+        protected String answerOneExample() {
+            return "";
+        }
+
+        @Override
+        protected String answerTwoExample() {
+            return "";
+        }
+
+        @Test
+        void answerOneExampleTest() {
+            Assertions.assertThat(Day{{day}}Ugly.answerOne(inputOneExample())).isEqualTo(answerOneExample());
+        }
+
+        @Test
+        void answerTwoExampleTest() {
+            Assertions.assertThat(Day{{day}}Ugly.answerTwo(inputTwoExample())).isEqualTo(answerTwoExample());
+        }
+}
