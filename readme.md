@@ -44,4 +44,4 @@ Falls Sie Verbesserungen vorschlagen möchten oder Fehler finden, können Sie ge
 
 ---
 
-Viel Spaß beim Lösen der Advent of Code 2023 Aufgaben! 🌟🎄
+Viel Spaß beim Lösen der Advent of Code 2024 Aufgaben! 🌟🎄
