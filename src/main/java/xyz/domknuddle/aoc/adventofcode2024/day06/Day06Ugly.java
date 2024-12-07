@@ -24,8 +24,7 @@ public class Day06Ugly implements Day06 {
             }
         }
 
-        Position pointer = map.entrySet().stream().filter(e -> e.getValue() == '^').findFirst().get().getKey();
-        System.out.println(pointer);
+        Position pointer = map.entrySet().stream().filter(e -> e.getValue() == '^').findFirst().orElseThrow().getKey();
         int dir = 0;
         map.compute(pointer, (k, v) -> 'X');
         while (isOnField(pointer, map, dir)) {
@@ -33,13 +32,13 @@ public class Day06Ugly implements Day06 {
                 dir = (dir + 1) % 4;
             }
             pointer = pointer.next(dir);
-            System.out.println(pointer);
             map.compute(pointer, (k, v) -> 'X');
         }
         return Integer.toString(Collections.frequency(map.values(), 'X'));
 
     }
 
+    //between 1804 and 2083
     public static String answerTwo(Stream<String> input) {
         Map<Position, Character> map = new HashMap<>();
         List<String> list = input.collect(Collectors.toList());
@@ -51,48 +50,61 @@ public class Day06Ugly implements Day06 {
             }
         }
         int counter = 0;
-        Position pointer = map.entrySet().stream().filter(e -> e.getValue() == '^').findFirst().get().getKey();
+        Position pointer = map.entrySet().stream().filter(e -> e.getValue() == '^').findFirst().orElseThrow().getKey();
         int dir = 0;
         map.compute(pointer, (k, v) -> 'X');
         while (isOnField(pointer, map, dir)) {
             if (map.get(pointer.next(dir)) == '#') {
                 dir = (dir + 1) % 4;
             } else {
-                if (nextIsPositionsForAnObstruction(pointer.next(dir), map, (dir + 1) % 4)) {
+                if (nextIsPositionsForAnObstruction(pointer, map, (dir + 1) % 4)) {
                     counter++;
                 }
             }
             pointer = pointer.next(dir);
+            if (pointer.x == 34 && pointer.y == 42) {
+                System.out.println("hier");
+            }
         }
         return Integer.toString(counter);
 
     }
 
+    // Prüft, ob ein Zyklus (eine geschlossene Schleife) existiert
     private static boolean nextIsPositionsForAnObstruction(final Position position, Map<Position, Character> map, int direction) {
-        int turning = 0;
+        Map<Integer, Set<Position>> positions = new HashMap<>();
+        positions.put(0, new HashSet<>());
+        positions.put(1, new HashSet<>());
+        positions.put(2, new HashSet<>());
+        positions.put(3, new HashSet<>());
+
         Position pointer = position;
-        while (turning < 4 && isOnField(pointer, map, direction)) {
+
+        // Bewegt sich entlang der Richtung, bis eine Schleife entdeckt wird
+        while (isOnField(pointer, map, direction) && !positions.get(direction).contains(pointer)) {
             if (map.get(pointer.next(direction)) == '#') {
-                direction = (direction + 1) % 4;
-                turning++;
+                direction = (direction + 1) % 4; // Dreht nach rechts
             }
+            positions.get(direction).add(pointer);
             pointer = pointer.next(direction);
-            if (pointer.equals(position)) {
+
+            if (pointer.equals(position)) { // Zyklus gefunden
                 return true;
             }
         }
         return false;
     }
 
+    // Prüft, ob die nächste Position innerhalb des Spielfelds liegt
     private static boolean isOnField(Position pointer, Map<Position, Character> map, int dir) {
         Position nextPosition = pointer.next(dir);
         if (map.containsKey(nextPosition)) {
             if (map.get(nextPosition) == '#') {
-                return isOnField(pointer, map, (dir + 1) % 4);
+                return isOnField(pointer, map, (dir + 1) % 4); // Dreht nach rechts, wenn Wand
             }
-            return true;
+            return true; // Nächste Position ist gültig
         }
-        return false;
+        return false; // Außerhalb des Felds
     }
 
     @Override
