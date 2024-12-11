@@ -27,10 +27,10 @@ public class Day10Ugly implements Day10 {
         long sum = 0L;
 
         List<Position> startingMap = fullMap.entrySet().stream().filter(e->e.getValue() == 0).map(Map.Entry::getKey).toList();
-        for (Position p : startingMap) {
+        for (Position startPosition : startingMap) {
             Set<Position> endPositions = new HashSet<>();
             Set<Position> positions = new HashSet<>();
-            positions.add(p);
+            positions.add(startPosition);
             while (!positions.isEmpty()) {
                 Position actualPosition = getPositionWithSmalestHeight (positions, fullMap);
                 positions.remove(actualPosition);
@@ -57,8 +57,22 @@ public class Day10Ugly implements Day10 {
             }
         }
         List<Position> startingMap = fullMap.entrySet().stream().filter(e->e.getValue() == 0).map(Map.Entry::getKey).toList();
-        //TODO
-        return "";
+        int sum = 0;
+
+        for (Position startPostion : startingMap) {
+            List<Position> positions = new ArrayList<>();
+            positions.add(startPostion);
+            while (!positions.isEmpty()) {
+                Position actualPosition = positions.remove(0);
+                if (fullMap.get(actualPosition) == 9) {
+                    sum++;
+                } else {
+                    positions.addAll(actualPosition.nextPossiblePositions(fullMap));
+                }
+            }
+        }
+
+        return Integer.toString(sum);
     }
 
     private static Position getPositionWithSmalestHeight(Set<Position> positions, Map<Position, Integer> fullMap) {
