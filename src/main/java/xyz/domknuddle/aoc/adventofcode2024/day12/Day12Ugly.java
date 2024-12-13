@@ -72,6 +72,8 @@ public class Day12Ugly implements Day12 {
                     cluster.addAll(newSet);
                 } while (cluster.size() > size);
                 clusters.add(cluster);
+                System.out.println(cluster);
+                System.out.println(calcualteSides(cluster));
             }
         }
         long sum = clusters.stream().mapToLong(e -> (long) calculateArea(e) * calcualteSides(e)).sum();
@@ -103,7 +105,56 @@ public class Day12Ugly implements Day12 {
     }
 
     private static int calcualteSides(SortedSet<Position> cluster) {
-        return 0;
+        int maxI = cluster.stream().mapToInt(e->e.i).max().orElseThrow();
+        int minI = cluster.stream().mapToInt(e->e.i).min().orElseThrow();
+        int maxJ = cluster.stream().mapToInt(e->e.j).max().orElseThrow();
+        int minJ = cluster.stream().mapToInt(e->e.j).min().orElseThrow();
+
+        int top = 0;
+        for (int i = minI; i <= maxI; i++) {
+            final int I = i;
+            NavigableSet<Position> filtered = cluster.stream().filter(e->e.i == I && !cluster.contains(new Position(e.i-1, e.j))).collect(Collectors.toCollection(TreeSet::new));
+            for (Position p : filtered) {
+                if (!filtered.contains(new Position(p.i, p.j+1))) {
+                    top++;
+                }
+            }
+        }
+
+        int button = 0;
+        for (int i = maxI; i >= minI; i--) {
+            final int I = i;
+            NavigableSet<Position> filtered = cluster.stream().filter(e->e.i == I && !cluster.contains(new Position(e.i+1, e.j))).collect(Collectors.toCollection(TreeSet::new));
+            for (Position p : filtered) {
+                if (!filtered.contains(new Position(p.i, p.j+1))) {
+                    button++;
+                }
+            }
+        }
+
+        int left = 0;
+        for (int j = minJ; j <= maxJ; j++) {
+            final int J = j;
+            NavigableSet<Position> filtered = cluster.stream().filter(e->e.j == J && !cluster.contains(new Position(e.i, e.j-1))).collect(Collectors.toCollection(TreeSet::new));
+            for (Position p : filtered) {
+                if (!filtered.contains(new Position(p.i+1, p.j))) {
+                    left++;
+                }
+            }
+        }
+
+        int right = 0;
+        for (int j = maxJ; j >= minJ; j--) {
+            final int J = j;
+            NavigableSet<Position> filtered = cluster.stream().filter(e->e.j == J && !cluster.contains(new Position(e.i, e.j+1))).collect(Collectors.toCollection(TreeSet::new));
+            for (Position p : filtered) {
+                if (!filtered.contains(new Position(p.i+1, p.j))) {
+                    right++;
+                }
+            }
+        }
+
+        return top + button + left + right;
     }
 
     private static void removeAndAddIfExists(NavigableSet<Position> set, Position newPos, Set<Position> newSet) {
