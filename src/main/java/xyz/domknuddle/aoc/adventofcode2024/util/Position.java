@@ -3,6 +3,7 @@ package xyz.domknuddle.aoc.adventofcode2024.util;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Position implements Comparable<Position> {
@@ -37,5 +38,17 @@ public class Position implements Comparable<Position> {
     @Override
     public String toString() {
         return i + " " + j;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position position)) return false;
+        return i == position.i && j == position.j;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(i, j);
     }
 }
